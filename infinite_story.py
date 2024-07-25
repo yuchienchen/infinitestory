@@ -20,8 +20,6 @@ write_key = story_key
 story_data = json.load(open(f'data/{story_key}.json'))
 
 def main():
-    story_data = json.load(open('data/original_big.json'))
-
     current_scene = 'start'
     
     while True:
