@@ -9,11 +9,11 @@ from openaikey import OPENAI_KEY
 openai_endpoint = "https://api.openai.com/v1/chat/completions"
 headers = {
     "Content-Type":"application/json",
-    "Authorization":f"Bearer{OPENAI_KEY}"
+    "Authorization":f"Bearer {OPENAI_KEY}"
 }
 
 data = {
-    "model":"gpt-4o",
+    "model":"gpt-3.5-turbo",
     "messages":[
         {
             "role":"systems",
