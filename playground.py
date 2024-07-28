@@ -16,7 +16,7 @@ data = {
     "model":"gpt-4o",
     "messages":[
         {
-            "role":"system",
+            "role":"user",
             "content":"Respond with some positive emojis"
         }
     ]
