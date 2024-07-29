@@ -15,6 +15,11 @@ STORY_NAME = "original_small"
 def print_scene(scene_data):
     text = scene_data["text"]
     print(text)
+    scene_choices = scene_data["choices"]
+
+    for idx, choice in enumerate(scene_choices):
+        choice_text = choice["text"]
+        print(f"{idx + 1}.{choice_text}")
 
 
 def main():
