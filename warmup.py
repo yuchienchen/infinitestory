@@ -14,9 +14,12 @@ def main():
     for valid_key in valid_keys:
         scene_dict = scenes[valid_key]
         choices = scene_dict["choices"] 
-        print(choices)
+        # print(choices)
+        for choice in choices:
+            choice_key = choice["scene_key"]
+            print(choice_key)
 
 
 
 if __name__ == "__main__":
-    main()
+    main()  
