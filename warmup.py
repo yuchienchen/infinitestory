@@ -9,15 +9,19 @@ def main():
     # print(story_data.keys())
     scenes = story_data["scenes"]
     valid_keys = list(scenes.keys())
-    print(valid_keys)
+    # print(valid_keys)
 
+    invalid_keys =[]
     for valid_key in valid_keys:
         scene_dict = scenes[valid_key]
         choices = scene_dict["choices"] 
         # print(choices)
         for choice in choices:
             choice_key = choice["scene_key"]
-            print(choice_key)
+            # print(choice_key)
+            if choice_key not in valid_keys:
+                invalid_keys.append(choice_key)
+    print(invalid_keys)
 
 
 
