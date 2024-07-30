@@ -26,7 +26,7 @@ def get_valid_choice(scene_data):
         choice = input("Please enter a valid choice: ")
 
     valid_idx = int(choice) - 1
-    valid_scene = scene_data(["choices"][valid_idx])
+    valid_scene = scene_data["choices"][valid_idx]
 
     return valid_scene
 
