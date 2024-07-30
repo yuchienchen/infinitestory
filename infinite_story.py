@@ -10,7 +10,7 @@ from openai import OpenAI
 from openaikey import OPENAI_KEY
 
 client = OpenAI(api_key=OPENAI_KEY)
-STORY_NAME = "original_small"
+STORY_NAME = "original_big"
 
 
 def get_valid_choice(scene_data):
