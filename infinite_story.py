@@ -9,7 +9,7 @@ from PIL import Image, ImageTk
 from openai import OpenAI
 from openaikey import OPENAI_KEY
 
-client = OpenAI(api_key=OPENAI_KEY)
+CLIENT = OpenAI(api_key=OPENAI_KEY)
 STORY_NAME = "original_small"
 
 
@@ -40,6 +40,28 @@ def print_scene(scene_data):
         choice_text = choice["text"]
         print(f"{idx + 1}.{choice_text}")
 
+def get_new_scene(scene_key, example_scene, plot):
+    print("[Suspenseful music plays as the story continues...]")
+    prompt = f"""
+Return the next scene of a story for key [scene key]. 
+An example scene should be formatted in json like this: [example scene]. 
+The main plot line of the story is [plot].
+"""    
+    
+    chat_completion = CLIENT.chat.completions.create(
+        messages=[{
+            "role": "user",
+            "content": prompt,
+        }],
+        model="gpt-3.5-turbo", # the GPT model to use
+        response_format={"type": "json_object"} # we want our response in json format,
+    )
+
+    response_str = chat_completion.choices[0].message.content
+    new_scene_data = json.loads(response_str)
+
+    return new_scene_data
+
 
 def main():
     print("infinite story")
@@ -51,6 +73,14 @@ def main():
     while True:
         choice_scene = get_valid_choice(current_scene)
         choice_key = choice_scene["scene_key"]
+
+        if choice_key not in story_data["scenes"]:
+            # Get new scene from openAI
+            new_scene = get_new_scene(choice_key, story_data["scenes"]["start"], story_data["plot"])
+            story_data["scenes"][choice_key] = new_scene
+
+
+
         current_scene = story_data["scenes"][choice_key]
 
 
