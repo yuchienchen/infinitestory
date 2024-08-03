@@ -51,7 +51,7 @@ def main():
     while True:
         choice_scene = get_valid_choice(current_scene)
         choice_key = choice_scene["scene_key"]
-        current_scene = story_data["scenes"[choice_key]]
+        current_scene = story_data["scenes"][choice_key]
 
 
 
