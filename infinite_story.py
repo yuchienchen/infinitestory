@@ -46,8 +46,12 @@ def main():
     story_data = json.load(open(f"data/{STORY_NAME}.json"))
     # print(story_data)
     starter_key = 'start'
-    starter_scene = story_data["scenes"][starter_key]
-    get_valid_choice(starter_scene)
+    current_scene = story_data["scenes"][starter_key]
+
+    while True:
+        choice_scene = get_valid_choice(current_scene)
+        choice_key = choice_scene["scene_key"]
+        current_scene = story_data["scenes"[choice_key]]
 
 
 
