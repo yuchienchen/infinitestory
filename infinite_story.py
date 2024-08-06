@@ -32,10 +32,10 @@ def get_valid_choice(scene_data):
     return valid_scene
 
 
-def print_scene(scene_data, scene_key):     
+def print_scene(scene_data, scene_key):     # miss 1 required positional argument: 'scene_key'
     text = scene_data["text"]       # key error
     print(text)
-    show_illustration(scene_key)        
+    show_illustration(scene_key)        # call it
     scene_choices = scene_data["choices"]
 
     for idx, choice in enumerate(scene_choices):
