@@ -10,8 +10,9 @@ from openai import OpenAI
 from openaikey import OPENAI_KEY
 
 CLIENT = OpenAI(api_key=OPENAI_KEY)
-STORY_NAME = "original_small"
+STORY_NAME = "original_big"
 
+canvas = Canvas(1024, 1224, "Infinte Story")
 
 def get_valid_choice(scene_data):
     print_scene(scene_data)
@@ -31,9 +32,10 @@ def get_valid_choice(scene_data):
     return valid_scene
 
 
-def print_scene(scene_data):
-    text = scene_data["text"]
+def print_scene(scene_data, scene_key):     
+    text = scene_data["text"]       # key error
     print(text)
+    show_illustration(scene_key)        
     scene_choices = scene_data["choices"]
 
     for idx, choice in enumerate(scene_choices):
@@ -63,6 +65,16 @@ The main plot line of the story is [plot].
     return new_scene_data
 
 
+def show_illustration(scene_key):
+    illustration_path = f"img/{STORY_NAME}/{scene_key}.png"
+    if os.path.exists(illustration_path):
+        canvas.clear()
+        canvas.create_image(0, 0, illustration_path)
+    else:
+        canvas.clear()
+        canvas.create_rectangle(0, 0, 1024, 1224, "black")
+
+
 def main():
     print("infinite story")
     story_data = json.load(open(f"data/{STORY_NAME}.json"))
@@ -71,7 +83,7 @@ def main():
     current_scene = story_data["scenes"][starter_key]
 
     while True:
-        choice_scene = get_valid_choice(current_scene)
+        choice_scene = get_valid_choice(current_scene)      #?
         choice_key = choice_scene["scene_key"]
 
         if choice_key not in story_data["scenes"]:
